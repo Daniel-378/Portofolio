@@ -1,0 +1,883 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio & Bio Link</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: {
+                            50: 'var(--accent-50)',
+                            400: 'var(--accent-400)',
+                            500: 'var(--accent-500)',
+                            600: 'var(--accent-600)',
+                            700: 'var(--accent-700)',
+                        }
+                    },
+                    animation: {
+                        'glow-pulse': 'glow 3s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(124, 58, 237, 0.4), 0 0 30px rgba(124, 58, 237, 0.2)' },
+                            '100%': { boxShadow: '0 0 25px rgba(168, 85, 247, 0.7), 0 0 50px rgba(168, 85, 247, 0.4)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --accent-50: #f5f3ff;
+            --accent-400: #a78bfa;
+            --accent-500: #8b5cf6;
+            --accent-600: #7c3aed;
+            --accent-700: #6d28d9;
+            --accent-glow: rgba(139, 92, 246, 0.35);
+        }
+
+        /* Glassmorphism utility classes */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.2s ease;
+        }
+
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Text gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-400) 50%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-[#07090e] text-slate-100 min-h-screen font-sans selection:bg-purple-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Interactive Canvas Particle Background -->
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+
+    <!-- Ambient Glowing Orbs Background -->
+    <div class="fixed top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-purple-900/20 blur-[130px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-indigo-900/20 blur-[130px] pointer-events-none z-0"></div>
+    <div class="fixed top-[40%] right-[20%] w-[30vw] h-[30vw] rounded-full bg-blue-900/15 blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 max-w-2xl mx-auto px-4 py-8 md:py-12 flex flex-col min-h-screen">
+
+        <!-- Top Action Bar -->
+        <header class="flex items-center justify-between mb-8 glass-panel px-4 py-3 rounded-2xl">
+            <!-- Dynamic Status Badge -->
+            <div id="status-badge" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="display-status-text">Open for Collaboration</span>
+            </div>
+
+            <!-- Quick Action Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Quick Share Button -->
+                <button onclick="openShareModal()" title="Bagikan Profil" class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 hover:text-white transition">
+                    <i class="fa-solid fa-share-nodes text-sm"></i>
+                </button>
+                <!-- Quick Sound Vibe Toggle -->
+                <button id="sound-btn" onclick="toggleAudio()" title="Sound FX" class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 hover:text-white transition">
+                    <i id="sound-icon" class="fa-solid fa-volume-xmark text-sm"></i>
+                </button>
+                <!-- Edit & Customization Toggle Button -->
+                <button onclick="toggleEditPanel()" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs shadow-lg shadow-purple-600/30 flex items-center gap-1.5 transition active:scale-95">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Edit Profile</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Profile Hero Section -->
+        <section class="glass-panel p-6 sm:p-8 rounded-3xl mb-8 relative overflow-hidden text-center shadow-2xl">
+            <!-- Decorative Banner Glow -->
+            <div class="absolute top-0 left-0 right-0 h-28 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-pink-600/20 blur-xl pointer-events-none"></div>
+
+            <!-- Profile Avatar Frame with Live Change Photo Feature -->
+            <div class="relative inline-block mb-5 group">
+                <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-purple-500 via-indigo-500 to-pink-500 animate-glow-pulse shadow-xl relative mx-auto">
+                    <img id="avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Avatar" class="w-full h-full object-cover rounded-full bg-slate-900 border-2 border-slate-900">
+                </div>
+                
+                <!-- Quick Upload Photo Overlay Button -->
+                <label for="avatar-file-input" class="absolute bottom-0 right-0 bg-purple-600 hover:bg-purple-500 text-white p-2.5 rounded-full shadow-lg cursor-pointer transition transform hover:scale-110 border-2 border-slate-900 flex items-center justify-center" title="Ganti Foto">
+                    <i class="fa-solid fa-camera text-xs"></i>
+                </label>
+                <input type="file" id="avatar-file-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
+            </div>
+
+            <!-- Profile Info Header -->
+            <div class="space-y-2">
+                <div class="flex items-center justify-center gap-2">
+                    <h1 id="display-name" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-gradient">Alfari Rizky</h1>
+                    <span class="text-purple-400 text-lg" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
+                </div>
+                
+                <p id="display-tagline" class="text-sm sm:text-base font-medium text-purple-300/90">Creative Developer & Digital Architect 🚀</p>
+                
+                <div class="flex items-center justify-center gap-4 text-xs text-slate-400 pt-1">
+                    <span id="display-location" class="flex items-center gap-1"><i class="fa-solid fa-location-dot text-purple-400"></i> Jakarta, Indonesia</span>
+                    <span>•</span>
+                    <span id="display-joined" class="flex items-center gap-1"><i class="fa-solid fa-calendar text-purple-400"></i> Joined 2024</span>
+                </div>
+            </div>
+
+            <!-- Profile Bio Description -->
+            <p id="display-bio" class="mt-4 text-sm text-slate-300 leading-relaxed max-w-lg mx-auto">
+                Membangun pengalaman web modern, antarmuka elegan, dan ekosistem digital interaktif. Terbuka untuk proyek freelance, kolaborasi, dan diskusi ide kreatif.
+            </p>
+
+            <!-- Quick Stats Counters Bar -->
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 mt-6 pt-6 border-t border-slate-800/80">
+                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                    <div id="stat-1-val" class="text-base sm:text-lg font-bold text-white">45+</div>
+                    <div id="stat-1-lbl" class="text-[10px] sm:text-xs text-slate-400">Projects</div>
+                </div>
+                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                    <div id="stat-2-val" class="text-base sm:text-lg font-bold text-white">1.2k</div>
+                    <div id="stat-2-lbl" class="text-[10px] sm:text-xs text-slate-400">Coffees</div>
+                </div>
+                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                    <div id="stat-3-val" class="text-base sm:text-lg font-bold text-white">5+</div>
+                    <div id="stat-3-lbl" class="text-[10px] sm:text-xs text-slate-400">Years Exp</div>
+                </div>
+                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                    <div id="stat-4-val" class="text-base sm:text-lg font-bold text-white">4.9★</div>
+                    <div id="stat-4-lbl" class="text-[10px] sm:text-xs text-slate-400">Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabbed Navigation Switcher -->
+        <div class="flex p-1.5 rounded-2xl glass-panel mb-6 space-x-1">
+            <button onclick="switchTab('links')" id="tab-btn-links" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-purple-600 text-white shadow-md">
+                <i class="fa-solid fa-link text-xs"></i>
+                <span>Tautan Saya</span>
+            </button>
+            <button onclick="switchTab('about')" id="tab-btn-about" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-user text-xs"></i>
+                <span>Keahlian & Bio</span>
+            </button>
+            <button onclick="switchTab('projects')" id="tab-btn-projects" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-layer-group text-xs"></i>
+                <span>Showcase</span>
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: LINKS CONTAINER -->
+        <main id="tab-content-links" class="space-y-3.5 mb-12">
+            <!-- Dynamic links list will be rendered here via JS -->
+            <div id="links-container" class="space-y-3.5"></div>
+        </main>
+
+        <!-- TAB CONTENT 2: ABOUT & SKILLS CONTAINER -->
+        <div id="tab-content-about" class="space-y-6 mb-12 hidden">
+            <!-- Skill Badges Panel -->
+            <div class="glass-panel p-6 rounded-3xl space-y-4">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-code text-purple-400"></i>
+                    <span>Keahlian & Spesialisasi</span>
+                </h3>
+                <p class="text-xs text-slate-400">Teknologi dan tools yang sering saya gunakan dalam pengembangan software.</p>
+                
+                <div class="flex flex-wrap gap-2 pt-2" id="skills-container">
+                    <!-- Skills pills dynamically rendered -->
+                </div>
+            </div>
+
+            <!-- Mini Experience Timeline -->
+            <div class="glass-panel p-6 rounded-3xl space-y-4">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-purple-400"></i>
+                    <span>Pengalaman Ringkas</span>
+                </h3>
+
+                <div class="space-y-4 border-l-2 border-slate-800 ml-2 pl-4">
+                    <div class="relative">
+                        <div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-purple-500 ring-4 ring-slate-900"></div>
+                        <h4 class="text-sm font-bold text-white">Senior Web Developer</h4>
+                        <span class="text-[11px] text-purple-300">2023 - Sekarang • Remote</span>
+                        <p class="text-xs text-slate-400 mt-1">Mengembangkan sistem frontend SaaS berkinerja tinggi dan landing page interaktif modern.</p>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-indigo-500 ring-4 ring-slate-900"></div>
+                        <h4 class="text-sm font-bold text-white">UI/UX & Digital Designer</h4>
+                        <span class="text-[11px] text-purple-300">2021 - 2023 • Studio Creatives</span>
+                        <p class="text-xs text-slate-400 mt-1">Merancang sistem desain, wireframe, serta pengalaman pengguna yang human-centered.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 3: PROJECTS SHOWCASE CONTAINER -->
+        <div id="tab-content-projects" class="space-y-4 mb-12 hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="projects-container">
+                <!-- Projects cards rendered dynamically -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto text-center pt-8 border-t border-slate-800/60 pb-6 text-xs text-slate-500">
+            <p>© <span id="footer-year"></span> <span id="footer-name">Alfari Rizky</span>. Crafted with <i class="fa-solid fa-heart text-purple-500"></i> & Glassmorphism UI</p>
+            <p class="mt-1 text-[11px] text-slate-600">Klik "Edit Profile" di kanan atas untuk mengganti foto, nama & link kamu secara langsung.</p>
+        </footer>
+
+    </div>
+
+    <!-- MODAL 1: REAL-TIME EDITING & CUSTOMIZATION PANEL -->
+    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel bg-slate-900/95 max-w-xl w-full rounded-3xl max-h-[90vh] flex flex-col border border-slate-700/50 shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Edit Profile & Link</h3>
+                </div>
+                <button onclick="toggleEditPanel()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Scrollable Content -->
+            <div class="p-6 space-y-6 overflow-y-auto">
+
+                <!-- 1. Photo Upload & Preview Section -->
+                <div class="space-y-3">
+                    <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Foto Profil (Avatar)</label>
+                    <div class="flex items-center gap-4 p-3 rounded-2xl bg-slate-800/40 border border-slate-700/50">
+                        <img id="edit-avatar-preview" src="" alt="Preview" class="w-16 h-16 rounded-full object-cover border border-purple-500/50">
+                        <div class="space-y-2 flex-1">
+                            <div class="flex items-center gap-2">
+                                <label for="modal-file-input" class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium cursor-pointer transition inline-flex items-center gap-1.5">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <span>Upload Foto Baru</span>
+                                </label>
+                                <input type="file" id="modal-file-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
+                            </div>
+                            <input type="text" id="input-avatar-url" placeholder="Atau paste URL Foto langsung di sini..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Personal Info Fields -->
+                <div class="space-y-3">
+                    <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Informasi Diri</label>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Nama Lengkap</label>
+                            <input type="text" id="input-name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Status Badge</label>
+                            <input type="text" id="input-status" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Tagline / Profesi</label>
+                        <input type="text" id="input-tagline" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Lokasi</label>
+                        <input type="text" id="input-location" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Bio Singkat</label>
+                        <textarea id="input-bio" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-purple-500"></textarea>
+                    </div>
+                </div>
+
+                <!-- 3. Accent Theme Selector -->
+                <div class="space-y-3">
+                    <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Tema Warna Aksens</label>
+                    <div class="flex items-center gap-3">
+                        <button onclick="setThemeAccent('purple')" class="w-8 h-8 rounded-full bg-purple-600 ring-2 ring-white/20 hover:scale-110 transition" title="Purple Aurora"></button>
+                        <button onclick="setThemeAccent('emerald')" class="w-8 h-8 rounded-full bg-emerald-500 ring-2 ring-white/20 hover:scale-110 transition" title="Emerald Glow"></button>
+                        <button onclick="setThemeAccent('cyan')" class="w-8 h-8 rounded-full bg-cyan-500 ring-2 ring-white/20 hover:scale-110 transition" title="Electric Cyan"></button>
+                        <button onclick="setThemeAccent('rose')" class="w-8 h-8 rounded-full bg-rose-500 ring-2 ring-white/20 hover:scale-110 transition" title="Rose Gold"></button>
+                        <button onclick="setThemeAccent('amber')" class="w-8 h-8 rounded-full bg-amber-500 ring-2 ring-white/20 hover:scale-110 transition" title="Sunset Amber"></button>
+                    </div>
+                </div>
+
+                <!-- 4. Manage Custom Links -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Kelola Tautan Sosial & Portfolio</label>
+                        <button onclick="addNewLink()" class="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 font-medium">
+                            <i class="fa-solid fa-plus"></i> Tambah Link Baru
+                        </button>
+                    </div>
+                    <div id="modal-links-editor" class="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                        <!-- Dynamic Link Inputs rendered here -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer Controls -->
+            <div class="flex items-center justify-between px-6 py-4 border-t border-slate-800 bg-slate-900">
+                <button onclick="resetToDefaults()" class="px-4 py-2 rounded-xl border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-medium transition">
+                    Reset Default
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="toggleEditPanel()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition">
+                        Batal
+                    </button>
+                    <button onclick="saveProfileChanges()" class="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition shadow-lg shadow-purple-600/30">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: SHARE & QR CODE MODAL -->
+    <div id="share-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel bg-slate-900/95 max-w-sm w-full rounded-3xl p-6 text-center border border-slate-700/50 shadow-2xl relative">
+            <button onclick="closeShareModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 mx-auto flex items-center justify-center mb-4">
+                <i class="fa-solid fa-qrcode text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Bagikan Kartu Digital</h3>
+            <p class="text-xs text-slate-400 mb-5">Pindai QR code di bawah ini untuk langsung membuka profil kamu di smartphone.</p>
+
+            <!-- Dynamic QR Code Container -->
+            <div class="bg-white p-4 rounded-2xl inline-block mb-5 shadow-inner">
+                <img id="qr-code-img" src="" alt="QR Code" class="w-40 h-40">
+            </div>
+
+            <!-- Share URL Action Bar -->
+            <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
+                <input type="text" id="share-url-input" readonly class="bg-transparent text-xs text-slate-300 px-2 flex-1 focus:outline-none">
+                <button onclick="copyProfileLink()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition">
+                    <i class="fa-solid fa-copy mr-1"></i> Salin
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300 glass-panel border border-purple-500/40 text-white px-4 py-3 rounded-2xl flex items-center gap-3 shadow-2xl">
+        <div class="w-7 h-7 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <span id="toast-message" class="text-xs font-medium">Perubahan berhasil disimpan!</span>
+    </div>
+
+    <!-- APPLICATION LOGIC SCRIPT -->
+    <script>
+        // 1. Initial State Data Schema
+        const DEFAULT_DATA = {
+            name: "Alfari Rizky",
+            tagline: "Creative Developer & Digital Architect 🚀",
+            location: "Jakarta, Indonesia",
+            joined: "2024",
+            status: "Open for Collaboration",
+            bio: "Membangun pengalaman web modern, antarmuka elegan, dan ekosistem digital interaktif. Terbuka untuk proyek freelance, kolaborasi, dan diskusi ide kreatif.",
+            avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+            theme: "purple",
+            stats: {
+                stat1Val: "45+", stat1Lbl: "Projects",
+                stat2Val: "1.2k", stat2Lbl: "Coffees",
+                stat3Val: "5+", stat3Lbl: "Years Exp",
+                stat4Val: "4.9★", stat4Lbl: "Rating"
+            },
+            skills: [
+                { name: "JavaScript / ES6+", icon: "fa-brands fa-js", color: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" },
+                { name: "React.js / Next.js", icon: "fa-brands fa-react", color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20" },
+                { name: "Tailwind CSS", icon: "fa-solid fa-wind", color: "bg-sky-500/10 text-sky-400 border-sky-500/20" },
+                { name: "Node.js & APIs", icon: "fa-brands fa-node-js", color: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
+                { name: "UI/UX Design", icon: "fa-solid fa-pen-nib", color: "bg-purple-500/10 text-purple-400 border-purple-500/20" },
+                { name: "Git & DevOps", icon: "fa-brands fa-github", color: "bg-slate-500/10 text-slate-300 border-slate-500/20" },
+            ],
+            links: [
+                { id: 1, title: "Instagram Profile", subtitle: "@alfari_dev • Foto & Update Harian", icon: "fa-brands fa-instagram", iconBg: "bg-pink-500/10 text-pink-400 border-pink-500/30", url: "https://instagram.com", category: "Social" },
+                { id: 2, title: "WhatsApp Direct Chat", subtitle: "Hubungi langsung untuk konsultasi & penawaran", icon: "fa-brands fa-whatsapp", iconBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30", url: "https://wa.me/", category: "Contact" },
+                { id: 3, title: "TikTok Channel", subtitle: "Short Tech Tutorials & Creative Process", icon: "fa-brands fa-tiktok", iconBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30", url: "https://tiktok.com", category: "Social" },
+                { id: 4, title: "LinkedIn Professional", subtitle: "Koneksi Karir & Pengalaman Kerja", icon: "fa-brands fa-linkedin-in", iconBg: "bg-blue-500/10 text-blue-400 border-blue-500/30", url: "https://linkedin.com", category: "Career" },
+                { id: 5, title: "GitHub Repositories", subtitle: "Kode sumber terbuka & proyek eksperimen", icon: "fa-brands fa-github", iconBg: "bg-purple-500/10 text-purple-400 border-purple-500/30", url: "https://github.com", category: "Code" },
+                { id: 6, title: "YouTube Tech Channel", subtitle: "Video tutorial mendalam tentang web dev", icon: "fa-brands fa-youtube", iconBg: "bg-red-500/10 text-red-400 border-red-500/30", url: "https://youtube.com", category: "Video" },
+                { id: 7, title: "Kirim Email Direct", subtitle: "Diskusi proyek formal & penawaran kerja", icon: "fa-solid fa-envelope", iconBg: "bg-amber-500/10 text-amber-400 border-amber-500/30", url: "mailto:contact@alfari.my.id", category: "Contact" }
+            ],
+            projects: [
+                { title: "Glassmorphism UI Kit", desc: "Komponen antarmuka modern berbahan kaca tembus pandang.", tags: ["React", "Tailwind"], link: "#" },
+                { title: "AI Assistant Dashboard", desc: "Antarmuka analitik kecerdasan buatan berbasis waktu nyata.", tags: ["Next.js", "AI API"], link: "#" },
+                { title: "E-Commerce App Sleek", desc: "Platform belanja online responsif bercepatan tinggi.", tags: ["Node.js", "Stripe"], link: "#" },
+                { title: "Personal Bio Engine", desc: "Aplikasi kartu nama digital siap pakai tanpa koding.", tags: ["HTML5", "CSS3"], link: "#" }
+            ]
+        };
+
+        // Reactive Application State
+        let profileState = JSON.parse(localStorage.getItem('alfari_profile_state')) || JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+        // 2. DOM Ready Initialization
+        window.onload = function() {
+            initBackgroundParticles();
+            renderProfile();
+            setThemeAccent(profileState.theme || 'purple');
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+        };
+
+        // 3. Render Profile & Dynamic Views
+        function renderProfile() {
+            document.getElementById('display-name').textContent = profileState.name;
+            document.getElementById('display-tagline').textContent = profileState.tagline;
+            document.getElementById('display-location').innerHTML = `<i class="fa-solid fa-location-dot text-purple-400"></i> ${profileState.location}`;
+            document.getElementById('display-joined').innerHTML = `<i class="fa-solid fa-calendar text-purple-400"></i> Joined ${profileState.joined || '2024'}`;
+            document.getElementById('display-status-text').textContent = profileState.status;
+            document.getElementById('display-bio').textContent = profileState.bio;
+            document.getElementById('avatar-img').src = profileState.avatarUrl;
+            document.getElementById('edit-avatar-preview').src = profileState.avatarUrl;
+            document.getElementById('footer-name').textContent = profileState.name;
+
+            // Render Links
+            const linksContainer = document.getElementById('links-container');
+            linksContainer.innerHTML = '';
+            profileState.links.forEach((link) => {
+                const linkCard = document.createElement('a');
+                linkCard.href = link.url;
+                linkCard.target = "_blank";
+                linkCard.className = "glass-card p-4 rounded-2xl flex items-center justify-between group text-decoration-none";
+                linkCard.innerHTML = `
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <div class="w-11 h-11 rounded-2xl ${link.iconBg || 'bg-purple-500/10 text-purple-400'} flex items-center justify-center text-lg shadow-sm border group-hover:scale-105 transition-transform">
+                            <i class="${link.icon}"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <h4 class="text-sm font-bold text-white group-hover:text-purple-300 transition truncate">${link.title}</h4>
+                            <p class="text-xs text-slate-400 truncate mt-0.5">${link.subtitle}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pl-2">
+                        <span class="w-8 h-8 rounded-xl bg-white/5 group-hover:bg-purple-600 text-slate-400 group-hover:text-white flex items-center justify-center text-xs transition">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </div>
+                `;
+                linksContainer.appendChild(linkCard);
+            });
+
+            // Render Skills
+            const skillsContainer = document.getElementById('skills-container');
+            skillsContainer.innerHTML = '';
+            profileState.skills.forEach(skill => {
+                const badge = document.createElement('span');
+                badge.className = `px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-2 ${skill.color}`;
+                badge.innerHTML = `<i class="${skill.icon}"></i> ${skill.name}`;
+                skillsContainer.appendChild(badge);
+            });
+
+            // Render Projects
+            const projectsContainer = document.getElementById('projects-container');
+            projectsContainer.innerHTML = '';
+            profileState.projects.forEach(proj => {
+                const projCard = document.createElement('div');
+                projCard.className = "glass-card p-5 rounded-2xl flex flex-col justify-between space-y-3";
+                projCard.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-sm text-white">${proj.title}</h4>
+                            <span class="text-slate-400 hover:text-purple-400 text-xs"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">${proj.desc}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        ${proj.tags.map(t => `<span class="px-2 py-0.5 rounded-md bg-purple-950/60 border border-purple-800/40 text-[10px] text-purple-300">${t}</span>`).join('')}
+                    </div>
+                `;
+                projectsContainer.appendChild(projCard);
+            });
+        }
+
+        // 4. Handle Avatar Upload (Instant Photo Change & Base64 Encode)
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('Ukuran foto terlalu besar (maksimal 5MB)');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const result = e.target.result;
+                    profileState.avatarUrl = result;
+                    document.getElementById('avatar-img').src = result;
+                    document.getElementById('edit-avatar-preview').src = result;
+                    document.getElementById('input-avatar-url').value = '';
+                    saveState();
+                    showToast('Foto profil berhasil diubah!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 5. Tab Navigation Handler
+        function switchTab(tabName) {
+            const tabs = ['links', 'about', 'projects'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                const content = document.getElementById(`tab-content-${t}`);
+                if (t === tabName) {
+                    btn.className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-purple-600 text-white shadow-md";
+                    content.classList.remove('hidden');
+                } else {
+                    btn.className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // 6. Customization Modal Toggle & Live Population
+        function toggleEditPanel() {
+            const modal = document.getElementById('edit-modal');
+            const isOpening = modal.classList.contains('pointer-events-none');
+            
+            if (isOpening) {
+                // Populate inputs with current state
+                document.getElementById('input-name').value = profileState.name;
+                document.getElementById('input-tagline').value = profileState.tagline;
+                document.getElementById('input-location').value = profileState.location;
+                document.getElementById('input-status').value = profileState.status;
+                document.getElementById('input-bio').value = profileState.bio;
+                document.getElementById('input-avatar-url').value = profileState.avatarUrl.startsWith('data:') ? '' : profileState.avatarUrl;
+                document.getElementById('edit-avatar-preview').src = profileState.avatarUrl;
+
+                renderModalLinksEditor();
+
+                modal.classList.remove('pointer-events-none', 'opacity-0');
+            } else {
+                modal.classList.add('pointer-events-none', 'opacity-0');
+            }
+        }
+
+        // Render dynamic link inputs inside the modal
+        function renderModalLinksEditor() {
+            const container = document.getElementById('modal-links-editor');
+            container.innerHTML = '';
+            profileState.links.forEach((link, idx) => {
+                const item = document.createElement('div');
+                item.className = "p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 relative";
+                item.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-purple-400">Link #${idx + 1}</span>
+                        <button onclick="removeLink(${idx})" class="text-rose-400 hover:text-rose-300 text-xs p-1" title="Hapus Link">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" value="${link.title}" onchange="updateLinkData(${idx}, 'title', this.value)" placeholder="Judul (ex: Instagram)" class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white">
+                        <input type="text" value="${link.subtitle}" onchange="updateLinkData(${idx}, 'subtitle', this.value)" placeholder="Keterangan Singkat" class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white">
+                    </div>
+                    <input type="text" value="${link.url}" onchange="updateLinkData(${idx}, 'url', this.value)" placeholder="URL Tujuan (https://...)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-purple-300">
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateLinkData(index, field, value) {
+            profileState.links[index][field] = value;
+        }
+
+        function addNewLink() {
+            profileState.links.push({
+                id: Date.now(),
+                title: "Tautan Baru",
+                subtitle: "Keterangan link baru kamu",
+                icon: "fa-solid fa-globe",
+                iconBg: "bg-purple-500/10 text-purple-400 border-purple-500/30",
+                url: "https://",
+                category: "Custom"
+            });
+            renderModalLinksEditor();
+        }
+
+        function removeLink(index) {
+            profileState.links.splice(index, 1);
+            renderModalLinksEditor();
+        }
+
+        // Save Profile Changes from Modal
+        function saveProfileChanges() {
+            const urlInput = document.getElementById('input-avatar-url').value.trim();
+            if (urlInput !== '') {
+                profileState.avatarUrl = urlInput;
+            }
+            profileState.name = document.getElementById('input-name').value;
+            profileState.tagline = document.getElementById('input-tagline').value;
+            profileState.location = document.getElementById('input-location').value;
+            profileState.status = document.getElementById('input-status').value;
+            profileState.bio = document.getElementById('input-bio').value;
+
+            saveState();
+            renderProfile();
+            toggleEditPanel();
+            showToast('Profil kamu berhasil diperbarui!');
+        }
+
+        // Theme Accent Switcher
+        function setThemeAccent(themeName) {
+            profileState.theme = themeName;
+            const root = document.documentElement;
+            
+            const themes = {
+                purple: { 50: '#f5f3ff', 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', glow: 'rgba(139, 92, 246, 0.35)' },
+                emerald: { 50: '#ecfdf5', 400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857', glow: 'rgba(16, 185, 129, 0.35)' },
+                cyan: { 50: '#ecfeff', 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', glow: 'rgba(6, 182, 212, 0.35)' },
+                rose: { 50: '#fff1f2', 400: '#fb7185', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c', glow: 'rgba(244, 63, 94, 0.35)' },
+                amber: { 50: '#fffbeb', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', glow: 'rgba(245, 158, 11, 0.35)' }
+            };
+
+            const t = themes[themeName] || themes.purple;
+            root.style.setProperty('--accent-50', t[50]);
+            root.style.setProperty('--accent-400', t[400]);
+            root.style.setProperty('--accent-500', t[500]);
+            root.style.setProperty('--accent-600', t[600]);
+            root.style.setProperty('--accent-700', t[700]);
+            root.style.setProperty('--accent-glow', t.glow);
+
+            saveState();
+        }
+
+        // Save State to Local Storage
+        function saveState() {
+            localStorage.setItem('alfari_profile_state', JSON.stringify(profileState));
+        }
+
+        // Reset Data to Default
+        function resetToDefaults() {
+            profileState = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            saveState();
+            renderProfile();
+            setThemeAccent('purple');
+            toggleEditPanel();
+            showToast('Profil dikembalikan ke pengaturan awal!');
+        }
+
+        // 7. Share Modal Controls & Dynamic QR Generator
+        function openShareModal() {
+            const modal = document.getElementById('share-modal');
+            const currentUrl = window.location.href;
+            document.getElementById('share-url-input').value = currentUrl;
+            
+            // Generate clean QR code using api.qrserver.com
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}&color=0f172a`;
+            document.getElementById('qr-code-img').src = qrUrl;
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').classList.add('pointer-events-none', 'opacity-0');
+        }
+
+        function copyProfileLink() {
+            const copyText = document.getElementById('share-url-input');
+            copyText.select();
+            document.execCommand('copy');
+            showToast('Link profil berhasil disalin!');
+            closeShareModal();
+        }
+
+        // 8. Interactive Toast Notifications
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-10');
+            setTimeout(() => {
+                toast.classList.add('pointer-events-none', 'opacity-0', 'translate-y-10');
+            }, 3000);
+        }
+
+        // 9. Ambient Audio Synthesizer (Tone/Oscillator effect)
+        let audioCtx = null;
+        let isPlayingAudio = false;
+        let ambientOsc = null;
+
+        function toggleAudio() {
+            const soundIcon = document.getElementById('sound-icon');
+            if (!isPlayingAudio) {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    audioCtx = new AudioContext();
+                    ambientOsc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    ambientOsc.type = 'sine';
+                    ambientOsc.frequency.setValueAtTime(220, audioCtx.currentTime); // Chill A3 note
+                    gain.gain.setValueAtTime(0.015, audioCtx.currentTime); // Soft volume
+
+                    ambientOsc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    ambientOsc.start();
+
+                    isPlayingAudio = true;
+                    soundIcon.className = "fa-solid fa-volume-high text-sm text-purple-400";
+                    showToast('Efek suara ambient aktif');
+                } catch (e) {
+                    showToast('Audio tidak didukung di peramban ini');
+                }
+            } else {
+                if (ambientOsc) ambientOsc.stop();
+                isPlayingAudio = false;
+                soundIcon.className = "fa-solid fa-volume-xmark text-sm";
+                showToast('Suara dinonaktifkan');
+            }
+        }
+
+        // 10. Interactive Canvas Particle System
+        function initBackgroundParticles() {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.5) * 0.4;
+                    this.radius = Math.random() * 1.8 + 0.6;
+                    this.alpha = Math.random() * 0.5 + 0.2;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(167, 139, 250, ${this.alpha})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 45; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw subtle connecting lines
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 110) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 * (1 - dist / 110)})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
+```
