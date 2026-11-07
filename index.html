@@ -1,14 +1,14 @@
 ```html
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio & Bio Link</title>
+    <title>Feryawan Daniel Redyansyah | Portfolio & Biodata</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,26 +23,16 @@
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        accent: {
-                            50: 'var(--accent-50)',
-                            400: 'var(--accent-400)',
-                            500: 'var(--accent-500)',
-                            600: 'var(--accent-600)',
-                            700: 'var(--accent-700)',
-                        }
-                    },
-                    animation: {
-                        'glow-pulse': 'glow 3s infinite alternate',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        glow: {
-                            '0%': { boxShadow: '0 0 15px rgba(124, 58, 237, 0.4), 0 0 30px rgba(124, 58, 237, 0.2)' },
-                            '100%': { boxShadow: '0 0 25px rgba(168, 85, 247, 0.7), 0 0 50px rgba(168, 85, 247, 0.4)' },
+                        brand: {
+                            50: '#f0fdf4',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
                         },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-8px)' },
+                        accent: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
                         }
                     }
                 }
@@ -51,48 +41,33 @@
     </script>
 
     <style>
-        :root {
-            --accent-50: #f5f3ff;
-            --accent-400: #a78bfa;
-            --accent-500: #8b5cf6;
-            --accent-600: #7c3aed;
-            --accent-700: #6d28d9;
-            --accent-glow: rgba(139, 92, 246, 0.35);
-        }
-
-        /* Glassmorphism utility classes */
+        /* Glassmorphism Styles (Optimized for fast CSS GPU rendering) */
         .glass-panel {
-            background: rgba(17, 24, 39, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            background: rgba(30, 41, 59, 0.7);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
-        }
-
-        .glass-button {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(30, 41, 59, 0.5);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .glass-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.25);
+        .light .glass-card {
+            background: rgba(248, 250, 252, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
         /* Custom Scrollbar */
@@ -100,782 +75,702 @@
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #090d16;
+            background: #0f172a;
+        }
+        .light ::-webkit-scrollbar-track {
+            background: #f1f5f9;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(99, 102, 241, 0.4);
             border-radius: 9999px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
 
-        /* Text gradient */
-        .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent-400) 50%, #e0e7ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Print styles for PDF / Resume generation */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .glass-panel, .glass-card {
+                background: #ffffff !important;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+                color: #000000 !important;
+            }
+            .text-slate-300, .text-slate-400, .text-slate-200 {
+                color: #334155 !important;
+            }
+            .text-white {
+                color: #0f172a !important;
+            }
         }
     </style>
 </head>
-<body class="bg-[#07090e] text-slate-100 min-h-screen font-sans selection:bg-purple-500 selection:text-white relative overflow-x-hidden">
+<body class="bg-slate-950 light:bg-slate-50 text-slate-100 light:text-slate-800 font-sans min-h-screen selection:bg-indigo-500 selection:text-white transition-colors duration-200">
 
-    <!-- Interactive Canvas Particle Background -->
-    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80 light:border-slate-200 no-print">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Brand / Name -->
+            <a href="#" class="flex items-center gap-2.5 font-bold text-lg text-white light:text-slate-900 tracking-tight">
+                <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md">F</span>
+                <span>Feryawan<span class="text-indigo-400 font-normal">.dev</span></span>
+            </a>
 
-    <!-- Ambient Glowing Orbs Background -->
-    <div class="fixed top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-purple-900/20 blur-[130px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-indigo-900/20 blur-[130px] pointer-events-none z-0"></div>
-    <div class="fixed top-[40%] right-[20%] w-[30vw] h-[30vw] rounded-full bg-blue-900/15 blur-[120px] pointer-events-none z-0"></div>
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-300 light:text-slate-600">
+                <a href="#about" class="hover:text-indigo-400 transition">Tentang</a>
+                <a href="#education" class="hover:text-indigo-400 transition">Pendidikan</a>
+                <a href="#skills" class="hover:text-indigo-400 transition">Keahlian</a>
+                <a href="#experience" class="hover:text-indigo-400 transition">Pengalaman</a>
+                <a href="#contact" class="hover:text-indigo-400 transition">Kontak</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-xl bg-slate-800/80 light:bg-slate-200 text-slate-300 light:text-slate-700 flex items-center justify-center hover:bg-slate-700 transition" title="Ganti Mode Terang/Gelap">
+                    <i id="theme-icon" class="fa-solid fa-moon text-xs"></i>
+                </button>
+
+                <!-- Print / Export PDF -->
+                <button onclick="window.print()" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 light:bg-slate-200 hover:bg-slate-700 text-slate-200 light:text-slate-800 text-xs font-semibold transition border border-slate-700 light:border-slate-300">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Cetak PDF</span>
+                </button>
+
+                <!-- Quick Contact WA Button -->
+                <a href="https://wa.me/6281234567890?text=Halo%20Ferry,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20sama." target="_blank" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-lg shadow-indigo-600/25 flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Hubungi</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
     <!-- Main Container -->
-    <div class="relative z-10 max-w-2xl mx-auto px-4 py-8 md:py-12 flex flex-col min-h-screen">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- Top Action Bar -->
-        <header class="flex items-center justify-between mb-8 glass-panel px-4 py-3 rounded-2xl">
-            <!-- Dynamic Status Badge -->
-            <div id="status-badge" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span id="display-status-text">Open for Collaboration</span>
-            </div>
+        <!-- HERO SECTION -->
+        <section class="glass-panel p-6 sm:p-10 rounded-3xl relative overflow-hidden shadow-2xl border border-slate-800 light:border-slate-200">
+            <!-- Decorative Accent Gradient Blob -->
+            <div class="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <!-- Quick Action Controls -->
-            <div class="flex items-center gap-2">
-                <!-- Quick Share Button -->
-                <button onclick="openShareModal()" title="Bagikan Profil" class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 hover:text-white transition">
-                    <i class="fa-solid fa-share-nodes text-sm"></i>
-                </button>
-                <!-- Quick Sound Vibe Toggle -->
-                <button id="sound-btn" onclick="toggleAudio()" title="Sound FX" class="glass-button w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 hover:text-white transition">
-                    <i id="sound-icon" class="fa-solid fa-volume-xmark text-sm"></i>
-                </button>
-                <!-- Edit & Customization Toggle Button -->
-                <button onclick="toggleEditPanel()" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs shadow-lg shadow-purple-600/30 flex items-center gap-1.5 transition active:scale-95">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Edit Profile</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- Profile Hero Section -->
-        <section class="glass-panel p-6 sm:p-8 rounded-3xl mb-8 relative overflow-hidden text-center shadow-2xl">
-            <!-- Decorative Banner Glow -->
-            <div class="absolute top-0 left-0 right-0 h-28 bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-pink-600/20 blur-xl pointer-events-none"></div>
-
-            <!-- Profile Avatar Frame with Live Change Photo Feature -->
-            <div class="relative inline-block mb-5 group">
-                <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-purple-500 via-indigo-500 to-pink-500 animate-glow-pulse shadow-xl relative mx-auto">
-                    <img id="avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Avatar" class="w-full h-full object-cover rounded-full bg-slate-900 border-2 border-slate-900">
-                </div>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
                 
-                <!-- Quick Upload Photo Overlay Button -->
-                <label for="avatar-file-input" class="absolute bottom-0 right-0 bg-purple-600 hover:bg-purple-500 text-white p-2.5 rounded-full shadow-lg cursor-pointer transition transform hover:scale-110 border-2 border-slate-900 flex items-center justify-center" title="Ganti Foto">
-                    <i class="fa-solid fa-camera text-xs"></i>
-                </label>
-                <input type="file" id="avatar-file-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
+                <!-- Avatar & Custom Photo Upload Box -->
+                <div class="flex flex-col items-center gap-3">
+                    <div class="relative group">
+                        <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl p-1.5 bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 shadow-xl overflow-hidden">
+                            <img id="profile-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Feryawan Daniel Redyansyah" class="w-full h-full object-cover rounded-xl bg-slate-900">
+                        </div>
+
+                        <!-- Upload Photo Trigger -->
+                        <label for="avatar-input" class="absolute bottom-2 right-2 bg-indigo-600 hover:bg-indigo-500 text-white p-2 rounded-xl shadow-lg cursor-pointer transition transform hover:scale-105 border border-slate-900 flex items-center justify-center no-print" title="Unggah Foto Kamu">
+                            <i class="fa-solid fa-camera text-xs"></i>
+                        </label>
+                        <input type="file" id="avatar-input" accept="image/*" class="hidden" onchange="uploadPhoto(event)">
+                    </div>
+                    <span class="text-[11px] text-slate-400 light:text-slate-500 no-print">Klik <i class="fa-solid fa-camera text-indigo-400"></i> untuk ganti foto</span>
+                </div>
+
+                <!-- Profile Info Header -->
+                <div class="flex-1 text-center md:text-left space-y-4">
+                    <!-- Badges -->
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 light:text-emerald-600 text-xs font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Open for HR Internship & Collaboration
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 light:text-indigo-600 text-xs font-semibold">
+                            <i class="fa-solid fa-trophy text-amber-400"></i> Finalis LKTI Nasional
+                        </span>
+                    </div>
+
+                    <!-- Name & Title -->
+                    <div>
+                        <h1 class="text-2xl sm:text-4xl font-extrabold text-white light:text-slate-900 tracking-tight">
+                            Feryawan Daniel Redyansyah
+                        </h1>
+                        <p class="text-sm sm:text-base font-semibold text-indigo-400 light:text-indigo-600 mt-1">
+                            Mahasiswa S1 Manajemen STIESIA Surabaya | HR & Data Analytics Specialist
+                        </p>
+                    </div>
+
+                    <!-- Meta info (Location & DOB) -->
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-400 light:text-slate-600">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-indigo-400"></i> Kalibader, Sidoarjo, Jawa Timur
+                        </span>
+                        <span>•</span>
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-graduation-cap text-indigo-400"></i> STIESIA Surabaya (Semester 5)
+                        </span>
+                    </div>
+
+                    <!-- Summary Description -->
+                    <p class="text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed max-w-2xl">
+                        Fokus keahlian pada Manajemen Sumber Daya Manusia, analisis data kuantitatif (SPSS & Excel), penganggaran keuangan manajerial, serta pengalaman praktis sebagai wirausahawan mandiri dan ketua organisasi kemasyarakatan.
+                    </p>
+
+                    <!-- Quick Action Buttons -->
+                    <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3 no-print">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Ferry,%20saya%20ingin%20berdiskusi%20tentang%20portofolio%20Anda." target="_blank" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>Hubungi Langsung</span>
+                        </a>
+                        <button onclick="openModal('contact-modal')" class="px-4 py-2 rounded-xl glass-card hover:bg-slate-700/50 text-slate-200 light:text-slate-800 text-xs font-semibold transition flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-indigo-400"></i>
+                            <span>Kirim Pesan</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Profile Info Header -->
-            <div class="space-y-2">
-                <div class="flex items-center justify-center gap-2">
-                    <h1 id="display-name" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-gradient">Alfari Rizky</h1>
-                    <span class="text-purple-400 text-lg" title="Verified Creator"><i class="fa-solid fa-circle-check"></i></span>
+            <!-- Quick Stat Highlight Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8 pt-6 border-t border-slate-800/80 light:border-slate-200">
+                <div class="glass-card p-3 rounded-2xl text-center">
+                    <span class="text-lg font-extrabold text-white light:text-slate-900 block">Sem 5</span>
+                    <span class="text-[11px] text-slate-400 light:text-slate-500">S1 Manajemen SDM</span>
                 </div>
-                
-                <p id="display-tagline" class="text-sm sm:text-base font-medium text-purple-300/90">Creative Developer & Digital Architect 🚀</p>
-                
-                <div class="flex items-center justify-center gap-4 text-xs text-slate-400 pt-1">
-                    <span id="display-location" class="flex items-center gap-1"><i class="fa-solid fa-location-dot text-purple-400"></i> Jakarta, Indonesia</span>
-                    <span>•</span>
-                    <span id="display-joined" class="flex items-center gap-1"><i class="fa-solid fa-calendar text-purple-400"></i> Joined 2024</span>
+                <div class="glass-card p-3 rounded-2xl text-center">
+                    <span class="text-lg font-extrabold text-indigo-400 block">SPSS & Excel</span>
+                    <span class="text-[11px] text-slate-400 light:text-slate-500">Analisis Data Kuantitatif</span>
                 </div>
-            </div>
-
-            <!-- Profile Bio Description -->
-            <p id="display-bio" class="mt-4 text-sm text-slate-300 leading-relaxed max-w-lg mx-auto">
-                Membangun pengalaman web modern, antarmuka elegan, dan ekosistem digital interaktif. Terbuka untuk proyek freelance, kolaborasi, dan diskusi ide kreatif.
-            </p>
-
-            <!-- Quick Stats Counters Bar -->
-            <div class="grid grid-cols-4 gap-2 sm:gap-4 mt-6 pt-6 border-t border-slate-800/80">
-                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
-                    <div id="stat-1-val" class="text-base sm:text-lg font-bold text-white">45+</div>
-                    <div id="stat-1-lbl" class="text-[10px] sm:text-xs text-slate-400">Projects</div>
+                <div class="glass-card p-3 rounded-2xl text-center">
+                    <span class="text-lg font-extrabold text-emerald-400 block">Finalis</span>
+                    <span class="text-[11px] text-slate-400 light:text-slate-500">LKTI Nasional UNSIKA</span>
                 </div>
-                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
-                    <div id="stat-2-val" class="text-base sm:text-lg font-bold text-white">1.2k</div>
-                    <div id="stat-2-lbl" class="text-[10px] sm:text-xs text-slate-400">Coffees</div>
-                </div>
-                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
-                    <div id="stat-3-val" class="text-base sm:text-lg font-bold text-white">5+</div>
-                    <div id="stat-3-lbl" class="text-[10px] sm:text-xs text-slate-400">Years Exp</div>
-                </div>
-                <div class="p-2 rounded-2xl bg-slate-800/30 border border-slate-700/30">
-                    <div id="stat-4-val" class="text-base sm:text-lg font-bold text-white">4.9★</div>
-                    <div id="stat-4-lbl" class="text-[10px] sm:text-xs text-slate-400">Rating</div>
+                <div class="glass-card p-3 rounded-2xl text-center">
+                    <span class="text-lg font-extrabold text-amber-400 block">Founder</span>
+                    <span class="text-[11px] text-slate-400 light:text-slate-500">Terang Bulan Sarang Madu</span>
                 </div>
             </div>
         </section>
 
-        <!-- Tabbed Navigation Switcher -->
-        <div class="flex p-1.5 rounded-2xl glass-panel mb-6 space-x-1">
-            <button onclick="switchTab('links')" id="tab-btn-links" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-purple-600 text-white shadow-md">
-                <i class="fa-solid fa-link text-xs"></i>
-                <span>Tautan Saya</span>
-            </button>
-            <button onclick="switchTab('about')" id="tab-btn-about" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-user text-xs"></i>
-                <span>Keahlian & Bio</span>
-            </button>
-            <button onclick="switchTab('projects')" id="tab-btn-projects" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-layer-group text-xs"></i>
-                <span>Showcase</span>
-            </button>
-        </div>
-
-        <!-- TAB CONTENT 1: LINKS CONTAINER -->
-        <main id="tab-content-links" class="space-y-3.5 mb-12">
-            <!-- Dynamic links list will be rendered here via JS -->
-            <div id="links-container" class="space-y-3.5"></div>
-        </main>
-
-        <!-- TAB CONTENT 2: ABOUT & SKILLS CONTAINER -->
-        <div id="tab-content-about" class="space-y-6 mb-12 hidden">
-            <!-- Skill Badges Panel -->
-            <div class="glass-panel p-6 rounded-3xl space-y-4">
-                <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-code text-purple-400"></i>
-                    <span>Keahlian & Spesialisasi</span>
-                </h3>
-                <p class="text-xs text-slate-400">Teknologi dan tools yang sering saya gunakan dalam pengembangan software.</p>
-                
-                <div class="flex flex-wrap gap-2 pt-2" id="skills-container">
-                    <!-- Skills pills dynamically rendered -->
+        <!-- SECTION: BIODATA & ABOUT ME -->
+        <section id="about" class="space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-user"></i>
                 </div>
+                <h2 class="text-xl font-bold text-white light:text-slate-900">Profil & Biodata Diri</h2>
             </div>
 
-            <!-- Mini Experience Timeline -->
-            <div class="glass-panel p-6 rounded-3xl space-y-4">
-                <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-briefcase text-purple-400"></i>
-                    <span>Pengalaman Ringkas</span>
-                </h3>
-
-                <div class="space-y-4 border-l-2 border-slate-800 ml-2 pl-4">
-                    <div class="relative">
-                        <div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-purple-500 ring-4 ring-slate-900"></div>
-                        <h4 class="text-sm font-bold text-white">Senior Web Developer</h4>
-                        <span class="text-[11px] text-purple-300">2023 - Sekarang • Remote</span>
-                        <p class="text-xs text-slate-400 mt-1">Mengembangkan sistem frontend SaaS berkinerja tinggi dan landing page interaktif modern.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Left: Quick Identity Table -->
+                <div class="glass-panel p-5 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">Identitas Ringkas</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between py-1 border-b border-slate-800 light:border-slate-200">
+                            <span class="text-slate-400 light:text-slate-500">Nama Lengkap</span>
+                            <span class="font-medium text-white light:text-slate-800">Feryawan Daniel R.</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-800 light:border-slate-200">
+                            <span class="text-slate-400 light:text-slate-500">Nama Panggilan</span>
+                            <span class="font-medium text-white light:text-slate-800">Ferry</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-800 light:border-slate-200">
+                            <span class="text-slate-400 light:text-slate-500">Tanggal Lahir</span>
+                            <span class="font-medium text-white light:text-slate-800">26 Januari 2006</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-800 light:border-slate-200">
+                            <span class="text-slate-400 light:text-slate-500">Domisili</span>
+                            <span class="font-medium text-white light:text-slate-800">Sidoarjo, Jawa Timur</span>
+                        </div>
+                        <div class="flex justify-between py-1">
+                            <span class="text-slate-400 light:text-slate-500">Institusi</span>
+                            <span class="font-medium text-indigo-400">STIESIA Surabaya</span>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="relative">
-                        <div class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-indigo-500 ring-4 ring-slate-900"></div>
-                        <h4 class="text-sm font-bold text-white">UI/UX & Digital Designer</h4>
-                        <span class="text-[11px] text-purple-300">2021 - 2023 • Studio Creatives</span>
-                        <p class="text-xs text-slate-400 mt-1">Merancang sistem desain, wireframe, serta pengalaman pengguna yang human-centered.</p>
+                <!-- Right: Detailed Bio Text -->
+                <div class="md:col-span-2 glass-panel p-6 rounded-2xl space-y-4">
+                    <h3 class="text-base font-bold text-white light:text-slate-900">Tentang Saya</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed">
+                        Saya adalah mahasiswa aktif S1 Manajemen di <strong>Sekolah Tinggi Ilmu Ekonomi Indonesia (STIESIA) Surabaya</strong> dengan konsentrasi pada <strong>Manajemen Sumber Daya Manusia (MSDM)</strong>. Memiliki minat mendalam terhadap riset kuantitatif, analisis etika kerja karyawan, serta tata kelola organisasi yang efisien.
+                    </p>
+                    <p class="text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed">
+                        Selain fokus pada bidang akademik, saya mengasah kemampuan kepemimpinan dan manajerial operasional secara langsung melalui kepengurusan organisasi masyarakat sebagai <strong>Ketua Pelaksana HUT RI ke-81</strong> serta menjalankan unit kewirausahaan mandiri <strong>Terang Bulan Sarang Madu</strong>.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 rounded-xl bg-slate-800 light:bg-slate-200 text-xs text-indigo-300 light:text-indigo-700 font-medium">#MSDM</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-800 light:bg-slate-200 text-xs text-indigo-300 light:text-indigo-700 font-medium">#DataAnalytics</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-800 light:bg-slate-200 text-xs text-indigo-300 light:text-indigo-700 font-medium">#SPSS & Excel</span>
+                        <span class="px-3 py-1 rounded-xl bg-slate-800 light:bg-slate-200 text-xs text-indigo-300 light:text-indigo-700 font-medium">#Entrepreneurship</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- TAB CONTENT 3: PROJECTS SHOWCASE CONTAINER -->
-        <div id="tab-content-projects" class="space-y-4 mb-12 hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="projects-container">
-                <!-- Projects cards rendered dynamically -->
+        <!-- SECTION: EDUCATION & ACHIEVEMENTS -->
+        <section id="education" class="space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h2 class="text-xl font-bold text-white light:text-slate-900">Pendidikan & Prestasi Akademis</h2>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <footer class="mt-auto text-center pt-8 border-t border-slate-800/60 pb-6 text-xs text-slate-500">
-            <p>© <span id="footer-year"></span> <span id="footer-name">Alfari Rizky</span>. Crafted with <i class="fa-solid fa-heart text-purple-500"></i> & Glassmorphism UI</p>
-            <p class="mt-1 text-[11px] text-slate-600">Klik "Edit Profile" di kanan atas untuk mengganti foto, nama & link kamu secara langsung.</p>
-        </footer>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Formal Education Card -->
+                <div class="glass-card p-6 rounded-2xl space-y-3 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-md bg-indigo-500/20 text-indigo-300 text-[11px] font-bold">2024 - Sekarang</span>
+                            <h3 class="text-base font-bold text-white light:text-slate-900 mt-2">S1 Manajemen SDM</h3>
+                            <p class="text-xs text-slate-400 light:text-slate-600">STIESIA Surabaya</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                    </div>
+                    <ul class="space-y-1.5 text-xs text-slate-300 light:text-slate-600 pt-2 border-t border-slate-800 light:border-slate-200">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Perencanaan Tenaga Kerja & Rekrutmen ATS</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Penganggaran Manajerial (Flexible Budgeting & ABC Costing)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Hukum Perdagangan & Kepabeanan Export-Import</li>
+                    </ul>
+                </div>
 
-    </div>
+                <!-- Academic Achievements Card -->
+                <div class="glass-card p-6 rounded-2xl space-y-3 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 text-[11px] font-bold">Prestasi & Rekam Jejak</span>
+                            <h3 class="text-base font-bold text-white light:text-slate-900 mt-2">Kompetisi & Simposium</h3>
+                            <p class="text-xs text-slate-400 light:text-slate-600">Nasional & Internasional</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-xs text-slate-300 light:text-slate-600 pt-2 border-t border-slate-800 light:border-slate-200">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-trophy text-amber-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white light:text-slate-800">Finalis LKTI Nasional FDIH</strong> – UNSIKA (Universitas Singaperbangsa Karawang)
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-earth-americas text-indigo-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white light:text-slate-800">International Symposium Participant</strong> – Employee Well-Being (CMS Business School, Jain University)
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-white light:text-slate-800">Riset Lapangan Kuantitatif</strong> – Etika Kerja Karyawan & Organizational Change Model
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <!-- MODAL 1: REAL-TIME EDITING & CUSTOMIZATION PANEL -->
-    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="glass-panel bg-slate-900/95 max-w-xl w-full rounded-3xl max-h-[90vh] flex flex-col border border-slate-700/50 shadow-2xl overflow-hidden">
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center">
+        <!-- SECTION: SKILLS & COMPETENCIES (INTERACTIVE TABS) -->
+        <section id="skills" class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
                         <i class="fa-solid fa-sliders"></i>
                     </div>
-                    <h3 class="font-bold text-white text-base">Edit Profile & Link</h3>
-                </div>
-                <button onclick="toggleEditPanel()" class="text-slate-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <!-- Modal Scrollable Content -->
-            <div class="p-6 space-y-6 overflow-y-auto">
-
-                <!-- 1. Photo Upload & Preview Section -->
-                <div class="space-y-3">
-                    <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Foto Profil (Avatar)</label>
-                    <div class="flex items-center gap-4 p-3 rounded-2xl bg-slate-800/40 border border-slate-700/50">
-                        <img id="edit-avatar-preview" src="" alt="Preview" class="w-16 h-16 rounded-full object-cover border border-purple-500/50">
-                        <div class="space-y-2 flex-1">
-                            <div class="flex items-center gap-2">
-                                <label for="modal-file-input" class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium cursor-pointer transition inline-flex items-center gap-1.5">
-                                    <i class="fa-solid fa-upload"></i>
-                                    <span>Upload Foto Baru</span>
-                                </label>
-                                <input type="file" id="modal-file-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
-                            </div>
-                            <input type="text" id="input-avatar-url" placeholder="Atau paste URL Foto langsung di sini..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-purple-500">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Personal Info Fields -->
-                <div class="space-y-3">
-                    <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Informasi Diri</label>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Nama Lengkap</label>
-                            <input type="text" id="input-name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Status Badge</label>
-                            <input type="text" id="input-status" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-[11px] text-slate-400 mb-1">Tagline / Profesi</label>
-                        <input type="text" id="input-tagline" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-[11px] text-slate-400 mb-1">Lokasi</label>
-                        <input type="text" id="input-location" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-[11px] text-slate-400 mb-1">Bio Singkat</label>
-                        <textarea id="input-bio" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-purple-500"></textarea>
-                    </div>
-                </div>
-
-                <!-- 3. Accent Theme Selector -->
-                <div class="space-y-3">
-                    <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Tema Warna Aksens</label>
-                    <div class="flex items-center gap-3">
-                        <button onclick="setThemeAccent('purple')" class="w-8 h-8 rounded-full bg-purple-600 ring-2 ring-white/20 hover:scale-110 transition" title="Purple Aurora"></button>
-                        <button onclick="setThemeAccent('emerald')" class="w-8 h-8 rounded-full bg-emerald-500 ring-2 ring-white/20 hover:scale-110 transition" title="Emerald Glow"></button>
-                        <button onclick="setThemeAccent('cyan')" class="w-8 h-8 rounded-full bg-cyan-500 ring-2 ring-white/20 hover:scale-110 transition" title="Electric Cyan"></button>
-                        <button onclick="setThemeAccent('rose')" class="w-8 h-8 rounded-full bg-rose-500 ring-2 ring-white/20 hover:scale-110 transition" title="Rose Gold"></button>
-                        <button onclick="setThemeAccent('amber')" class="w-8 h-8 rounded-full bg-amber-500 ring-2 ring-white/20 hover:scale-110 transition" title="Sunset Amber"></button>
-                    </div>
-                </div>
-
-                <!-- 4. Manage Custom Links -->
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <label class="block text-xs font-semibold text-purple-300 uppercase tracking-wider">Kelola Tautan Sosial & Portfolio</label>
-                        <button onclick="addNewLink()" class="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 font-medium">
-                            <i class="fa-solid fa-plus"></i> Tambah Link Baru
-                        </button>
-                    </div>
-                    <div id="modal-links-editor" class="space-y-2.5 max-h-56 overflow-y-auto pr-1">
-                        <!-- Dynamic Link Inputs rendered here -->
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Modal Footer Controls -->
-            <div class="flex items-center justify-between px-6 py-4 border-t border-slate-800 bg-slate-900">
-                <button onclick="resetToDefaults()" class="px-4 py-2 rounded-xl border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-medium transition">
-                    Reset Default
-                </button>
-                <div class="flex gap-2">
-                    <button onclick="toggleEditPanel()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition">
-                        Batal
-                    </button>
-                    <button onclick="saveProfileChanges()" class="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition shadow-lg shadow-purple-600/30">
-                        Simpan Perubahan
-                    </button>
+                    <h2 class="text-xl font-bold text-white light:text-slate-900">Keahlian & Kompetensi</h2>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- MODAL 2: SHARE & QR CODE MODAL -->
-    <div id="share-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="glass-panel bg-slate-900/95 max-w-sm w-full rounded-3xl p-6 text-center border border-slate-700/50 shadow-2xl relative">
-            <button onclick="closeShareModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
+            <!-- Interactive Category Switcher -->
+            <div class="flex flex-wrap gap-2 p-1.5 glass-panel rounded-2xl no-print">
+                <button onclick="filterSkills('all')" id="btn-skill-all" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow-md transition">Semua Keahlian</button>
+                <button onclick="filterSkills('data')" id="btn-skill-data" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">Analisis Data (SPSS)</button>
+                <button onclick="filterSkills('hr')" id="btn-skill-hr" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">Manajemen SDM</button>
+                <button onclick="filterSkills('finance')" id="btn-skill-finance" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">Keuangan & Operasional</button>
+            </div>
+
+            <!-- Skill Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="skills-grid">
+                <!-- Skill 1 -->
+                <div class="skill-card glass-card p-5 rounded-2xl space-y-2" data-cat="data">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg text-indigo-400"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">SPSS & Excel</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white light:text-slate-900">Analisis Data Kuantitatif</h4>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Pengolahan kuesioner digital, distribusi frekuensi, uji validitas, dan analisis regresi linier.</p>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="skill-card glass-card p-5 rounded-2xl space-y-2" data-cat="hr">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg text-emerald-400"><i class="fa-solid fa-users-gear"></i></span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Rekrutmen & ATS</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white light:text-slate-900">Perencanaan SDM & Karir</h4>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Penyusunan resume standar ATS, simulasi wawancara kerja, dan evaluasi etika karyawan.</p>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="skill-card glass-card p-5 rounded-2xl space-y-2" data-cat="finance">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg text-amber-400"><i class="fa-solid fa-calculator"></i></span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Budgeting</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white light:text-slate-900">Flexible Budgeting & ABC Costing</h4>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Perhitungan HPP, titik impas (BEP), dan penganggaran berbasis aktivitas manajerial.</p>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="skill-card glass-card p-5 rounded-2xl space-y-2" data-cat="hr">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg text-purple-400"><i class="fa-solid fa-heart-pulse"></i></span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Well-Being</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white light:text-slate-900">Employee Well-Being</h4>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Penerapan lingkungan kerja kondusif dan pemahaman model perubahan organisasi.</p>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="skill-card glass-card p-5 rounded-2xl space-y-2" data-cat="finance">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg text-rose-400"><i class="fa-solid fa-store"></i></span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">SOP & Operasional</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white light:text-slate-900">Manajemen Usaha Kuliner</h4>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Pengelolaan bahan baku, kontrol kualitas visual produk, serta laporan arus kas harian.</p>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="skill-card glass-card p-5 rounded-2xl space-y-2" data-cat="hr">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg text-sky-400"><i class="fa-solid fa-bullhorn"></i></span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">Kepemimpinan</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white light:text-slate-900">Event Management & Koordinasi</h4>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Kemampuan memimpin kepanitiaan lapangan, alokasi tugas, dan hubungan masyarakat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: EXPERIENCE timeline -->
+        <section id="experience" class="space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <h2 class="text-xl font-bold text-white light:text-slate-900">Pengalaman Kepemimpinan & Usaha</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Timeline Item 1 -->
+                <div class="glass-panel p-6 rounded-2xl space-y-3 border-l-4 border-l-indigo-500 relative">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <h3 class="text-base font-bold text-white light:text-slate-900">Ketua Pelaksana – Panitia Perayaan HUT RI ke-81</h3>
+                        <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold w-fit">Agustus 2026 • Sidoarjo</span>
+                    </div>
+                    <p class="text-xs text-slate-400 light:text-slate-600 font-medium">Karang Taruna RT 16 / RW 03 Kalibader, Sidoarjo</p>
+                    <ul class="space-y-1.5 text-xs text-slate-300 light:text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-dot text-indigo-400 text-[10px] mt-1"></i>
+                            <span>Memimpin dan mengoordinasikan seluruh rangkaian perayaan Hari Kemerdekaan RI di lingkungan RT 16 RW 03 Kalibader.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-dot text-indigo-400 text-[10px] mt-1"></i>
+                            <span>Mengelola alokasi anggaran belanja kegiatan, penyusunan jadwal acara, dan koordinasi dengan pengurus RT/RW setempat.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="glass-panel p-6 rounded-2xl space-y-3 border-l-4 border-l-amber-500 relative">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <h3 class="text-base font-bold text-white light:text-slate-900">Owner & Founder – Terang Bulan Sarang Madu</h3>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-semibold w-fit">Kewirausahaan Mandiri</span>
+                    </div>
+                    <p class="text-xs text-slate-400 light:text-slate-600 font-medium">Spesialis Martabak Manis Sarang Otentik & Krispi</p>
+                    <ul class="space-y-1.5 text-xs text-slate-300 light:text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-dot text-amber-400 text-[10px] mt-1"></i>
+                            <span>Mengembangkan resep dan standar operasional (SOP) pembuatan martabak manis bertekstur sarang otentik dengan renyah krispi.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-dot text-amber-400 text-[10px] mt-1"></i>
+                            <span>Mengatur strategi penentuan HPP, margin keuntungan, pemasaran lokal, serta pencatatan arus kas operasional harian.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE CALCULATOR MINI-TOOL (Shows Ferry's Managerial Skills) -->
+        <section class="glass-panel p-6 rounded-3xl space-y-4 no-print border border-indigo-500/30">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-sm font-bold">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-white light:text-slate-900">Simulasi Mini: Kalkulator HPP & Break-Even Point (BEP)</h3>
+                    <p class="text-xs text-slate-400 light:text-slate-600">Implementasi praktis konsep akuntansi manajerial & operasional usaha.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div>
+                    <label class="block text-[11px] text-slate-400 light:text-slate-600 mb-1">Total Biaya Bahan (Rp)</label>
+                    <input type="number" id="calc-cost" value="150000" oninput="calculateBEP()" class="w-full bg-slate-900 light:bg-white border border-slate-700 light:border-slate-300 rounded-xl px-3 py-1.5 text-xs text-white light:text-slate-900 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-slate-400 light:text-slate-600 mb-1">Jumlah Porsi / Unit</label>
+                    <input type="number" id="calc-units" value="15" oninput="calculateBEP()" class="w-full bg-slate-900 light:bg-white border border-slate-700 light:border-slate-300 rounded-xl px-3 py-1.5 text-xs text-white light:text-slate-900 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-slate-400 light:text-slate-600 mb-1">Harga Jual per Porsi (Rp)</label>
+                    <input type="number" id="calc-price" value="16000" oninput="calculateBEP()" class="w-full bg-slate-900 light:bg-white border border-slate-700 light:border-slate-300 rounded-xl px-3 py-1.5 text-xs text-white light:text-slate-900 focus:outline-none focus:border-indigo-500">
+                </div>
+            </div>
+
+            <!-- Calculated Output -->
+            <div class="p-4 rounded-2xl bg-slate-900/60 light:bg-slate-100 border border-slate-800 light:border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+                <div>
+                    <span class="text-slate-400 light:text-slate-500 block text-[10px]">HPP Modal per Porsi:</span>
+                    <strong id="out-hpp" class="text-indigo-400 text-sm font-bold">Rp 10.000</strong>
+                </div>
+                <div>
+                    <span class="text-slate-400 light:text-slate-500 block text-[10px]">Estimasi Keuntungan Bersih:</span>
+                    <strong id="out-profit" class="text-emerald-400 text-sm font-bold">Rp 90.000</strong>
+                </div>
+                <div>
+                    <span class="text-slate-400 light:text-slate-500 block text-[10px]">Status Operasional:</span>
+                    <span id="out-status" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[11px]">UNTUNG (Margin 37.5%)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CONTACT & SOCIALS -->
+        <section id="contact" class="glass-panel p-6 sm:p-8 rounded-3xl space-y-6">
+            <div class="text-center space-y-2">
+                <h2 class="text-xl font-bold text-white light:text-slate-900">Mari Terhubung & Berkolaborasi</h2>
+                <p class="text-xs text-slate-400 light:text-slate-600 max-w-md mx-auto">Terbuka untuk diskusi proyek riset, konsultasi SDM, serta kesempatan magang industri.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- WhatsApp Card -->
+                <a href="https://wa.me/6281234567890?text=Halo%20Ferry,%20saya%20tertarik%20dengan%20profil%20Anda." target="_blank" class="glass-card p-4 rounded-2xl flex items-center gap-3 text-decoration-none group">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg border border-emerald-500/20 group-hover:scale-110 transition">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white light:text-slate-900">WhatsApp Direct</h4>
+                        <p class="text-[11px] text-slate-400 light:text-slate-500">+62 812-3456-7890</p>
+                    </div>
+                </a>
+
+                <!-- Email Card -->
+                <a href="mailto:feryawan.daniel@gmail.com" class="glass-card p-4 rounded-2xl flex items-center gap-3 text-decoration-none group">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg border border-indigo-500/20 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white light:text-slate-900">Kirim Email</h4>
+                        <p class="text-[11px] text-slate-400 light:text-slate-500">feryawan.daniel@gmail.com</p>
+                    </div>
+                </a>
+
+                <!-- Location Card -->
+                <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg border border-purple-500/20">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white light:text-slate-900">Lokasi Utama</h4>
+                        <p class="text-[11px] text-slate-400 light:text-slate-500">Kalibader, Sidoarjo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-xs text-slate-500 light:text-slate-600 pt-6 border-t border-slate-800/80 light:border-slate-200 pb-8">
+            <p>© <span id="year"></span> Feryawan Daniel Redyansyah. Portfolio & Biodata Resmi.</p>
+            <p class="mt-1 text-[11px] text-slate-600 light:text-slate-400">STIESIA Surabaya • S1 Manajemen SDM</p>
+        </footer>
+
+    </main>
+
+    <!-- MESSAGE MODAL SIMULATOR -->
+    <div id="contact-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200 no-print">
+        <div class="glass-panel bg-slate-900/95 light:bg-white max-w-md w-full rounded-3xl p-6 border border-slate-700 light:border-slate-300 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('contact-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-base"></i>
             </button>
 
-            <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 mx-auto flex items-center justify-center mb-4">
-                <i class="fa-solid fa-qrcode text-xl"></i>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-1">Bagikan Kartu Digital</h3>
-            <p class="text-xs text-slate-400 mb-5">Pindai QR code di bawah ini untuk langsung membuka profil kamu di smartphone.</p>
-
-            <!-- Dynamic QR Code Container -->
-            <div class="bg-white p-4 rounded-2xl inline-block mb-5 shadow-inner">
-                <img id="qr-code-img" src="" alt="QR Code" class="w-40 h-40">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h3 class="text-base font-bold text-white light:text-slate-900">Kirim Pesan ke Ferry</h3>
             </div>
 
-            <!-- Share URL Action Bar -->
-            <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                <input type="text" id="share-url-input" readonly class="bg-transparent text-xs text-slate-300 px-2 flex-1 focus:outline-none">
-                <button onclick="copyProfileLink()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition">
-                    <i class="fa-solid fa-copy mr-1"></i> Salin
+            <form onsubmit="sendSimulatedMessage(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[11px] text-slate-400 light:text-slate-600 mb-1">Nama Anda</label>
+                    <input type="text" id="msg-name" required class="w-full bg-slate-950 light:bg-slate-100 border border-slate-800 light:border-slate-300 rounded-xl px-3 py-2 text-xs text-white light:text-slate-900 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-slate-400 light:text-slate-600 mb-1">Pesan / Topik Diskusi</label>
+                    <textarea id="msg-body" rows="3" required class="w-full bg-slate-950 light:bg-slate-100 border border-slate-800 light:border-slate-300 rounded-xl p-3 text-xs text-white light:text-slate-900 focus:outline-none focus:border-indigo-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-lg shadow-indigo-600/30">
+                    Kirim via WhatsApp
                 </button>
-            </div>
+            </form>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-300 glass-panel border border-purple-500/40 text-white px-4 py-3 rounded-2xl flex items-center gap-3 shadow-2xl">
-        <div class="w-7 h-7 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <span id="toast-message" class="text-xs font-medium">Perubahan berhasil disimpan!</span>
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none transition-all duration-200 glass-panel border border-indigo-500/40 text-white px-4 py-3 rounded-2xl flex items-center gap-3 shadow-xl">
+        <i class="fa-solid fa-circle-check text-indigo-400"></i>
+        <span id="toast-text" class="text-xs font-medium">Foto profil berhasil diubah!</span>
     </div>
 
-    <!-- APPLICATION LOGIC SCRIPT -->
+    <!-- APPLICATION SCRIPTS -->
     <script>
-        // 1. Initial State Data Schema
-        const DEFAULT_DATA = {
-            name: "Alfari Rizky",
-            tagline: "Creative Developer & Digital Architect 🚀",
-            location: "Jakarta, Indonesia",
-            joined: "2024",
-            status: "Open for Collaboration",
-            bio: "Membangun pengalaman web modern, antarmuka elegan, dan ekosistem digital interaktif. Terbuka untuk proyek freelance, kolaborasi, dan diskusi ide kreatif.",
-            avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-            theme: "purple",
-            stats: {
-                stat1Val: "45+", stat1Lbl: "Projects",
-                stat2Val: "1.2k", stat2Lbl: "Coffees",
-                stat3Val: "5+", stat3Lbl: "Years Exp",
-                stat4Val: "4.9★", stat4Lbl: "Rating"
-            },
-            skills: [
-                { name: "JavaScript / ES6+", icon: "fa-brands fa-js", color: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" },
-                { name: "React.js / Next.js", icon: "fa-brands fa-react", color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20" },
-                { name: "Tailwind CSS", icon: "fa-solid fa-wind", color: "bg-sky-500/10 text-sky-400 border-sky-500/20" },
-                { name: "Node.js & APIs", icon: "fa-brands fa-node-js", color: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
-                { name: "UI/UX Design", icon: "fa-solid fa-pen-nib", color: "bg-purple-500/10 text-purple-400 border-purple-500/20" },
-                { name: "Git & DevOps", icon: "fa-brands fa-github", color: "bg-slate-500/10 text-slate-300 border-slate-500/20" },
-            ],
-            links: [
-                { id: 1, title: "Instagram Profile", subtitle: "@alfari_dev • Foto & Update Harian", icon: "fa-brands fa-instagram", iconBg: "bg-pink-500/10 text-pink-400 border-pink-500/30", url: "https://instagram.com", category: "Social" },
-                { id: 2, title: "WhatsApp Direct Chat", subtitle: "Hubungi langsung untuk konsultasi & penawaran", icon: "fa-brands fa-whatsapp", iconBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30", url: "https://wa.me/", category: "Contact" },
-                { id: 3, title: "TikTok Channel", subtitle: "Short Tech Tutorials & Creative Process", icon: "fa-brands fa-tiktok", iconBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30", url: "https://tiktok.com", category: "Social" },
-                { id: 4, title: "LinkedIn Professional", subtitle: "Koneksi Karir & Pengalaman Kerja", icon: "fa-brands fa-linkedin-in", iconBg: "bg-blue-500/10 text-blue-400 border-blue-500/30", url: "https://linkedin.com", category: "Career" },
-                { id: 5, title: "GitHub Repositories", subtitle: "Kode sumber terbuka & proyek eksperimen", icon: "fa-brands fa-github", iconBg: "bg-purple-500/10 text-purple-400 border-purple-500/30", url: "https://github.com", category: "Code" },
-                { id: 6, title: "YouTube Tech Channel", subtitle: "Video tutorial mendalam tentang web dev", icon: "fa-brands fa-youtube", iconBg: "bg-red-500/10 text-red-400 border-red-500/30", url: "https://youtube.com", category: "Video" },
-                { id: 7, title: "Kirim Email Direct", subtitle: "Diskusi proyek formal & penawaran kerja", icon: "fa-solid fa-envelope", iconBg: "bg-amber-500/10 text-amber-400 border-amber-500/30", url: "mailto:contact@alfari.my.id", category: "Contact" }
-            ],
-            projects: [
-                { title: "Glassmorphism UI Kit", desc: "Komponen antarmuka modern berbahan kaca tembus pandang.", tags: ["React", "Tailwind"], link: "#" },
-                { title: "AI Assistant Dashboard", desc: "Antarmuka analitik kecerdasan buatan berbasis waktu nyata.", tags: ["Next.js", "AI API"], link: "#" },
-                { title: "E-Commerce App Sleek", desc: "Platform belanja online responsif bercepatan tinggi.", tags: ["Node.js", "Stripe"], link: "#" },
-                { title: "Personal Bio Engine", desc: "Aplikasi kartu nama digital siap pakai tanpa koding.", tags: ["HTML5", "CSS3"], link: "#" }
-            ]
-        };
+        // Set dynamic current year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Reactive Application State
-        let profileState = JSON.parse(localStorage.getItem('alfari_profile_state')) || JSON.parse(JSON.stringify(DEFAULT_DATA));
-
-        // 2. DOM Ready Initialization
-        window.onload = function() {
-            initBackgroundParticles();
-            renderProfile();
-            setThemeAccent(profileState.theme || 'purple');
-            document.getElementById('footer-year').textContent = new Date().getFullYear();
-        };
-
-        // 3. Render Profile & Dynamic Views
-        function renderProfile() {
-            document.getElementById('display-name').textContent = profileState.name;
-            document.getElementById('display-tagline').textContent = profileState.tagline;
-            document.getElementById('display-location').innerHTML = `<i class="fa-solid fa-location-dot text-purple-400"></i> ${profileState.location}`;
-            document.getElementById('display-joined').innerHTML = `<i class="fa-solid fa-calendar text-purple-400"></i> Joined ${profileState.joined || '2024'}`;
-            document.getElementById('display-status-text').textContent = profileState.status;
-            document.getElementById('display-bio').textContent = profileState.bio;
-            document.getElementById('avatar-img').src = profileState.avatarUrl;
-            document.getElementById('edit-avatar-preview').src = profileState.avatarUrl;
-            document.getElementById('footer-name').textContent = profileState.name;
-
-            // Render Links
-            const linksContainer = document.getElementById('links-container');
-            linksContainer.innerHTML = '';
-            profileState.links.forEach((link) => {
-                const linkCard = document.createElement('a');
-                linkCard.href = link.url;
-                linkCard.target = "_blank";
-                linkCard.className = "glass-card p-4 rounded-2xl flex items-center justify-between group text-decoration-none";
-                linkCard.innerHTML = `
-                    <div class="flex items-center gap-3.5 min-w-0">
-                        <div class="w-11 h-11 rounded-2xl ${link.iconBg || 'bg-purple-500/10 text-purple-400'} flex items-center justify-center text-lg shadow-sm border group-hover:scale-105 transition-transform">
-                            <i class="${link.icon}"></i>
-                        </div>
-                        <div class="min-w-0">
-                            <h4 class="text-sm font-bold text-white group-hover:text-purple-300 transition truncate">${link.title}</h4>
-                            <p class="text-xs text-slate-400 truncate mt-0.5">${link.subtitle}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 pl-2">
-                        <span class="w-8 h-8 rounded-xl bg-white/5 group-hover:bg-purple-600 text-slate-400 group-hover:text-white flex items-center justify-center text-xs transition">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </span>
-                    </div>
-                `;
-                linksContainer.appendChild(linkCard);
-            });
-
-            // Render Skills
-            const skillsContainer = document.getElementById('skills-container');
-            skillsContainer.innerHTML = '';
-            profileState.skills.forEach(skill => {
-                const badge = document.createElement('span');
-                badge.className = `px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-2 ${skill.color}`;
-                badge.innerHTML = `<i class="${skill.icon}"></i> ${skill.name}`;
-                skillsContainer.appendChild(badge);
-            });
-
-            // Render Projects
-            const projectsContainer = document.getElementById('projects-container');
-            projectsContainer.innerHTML = '';
-            profileState.projects.forEach(proj => {
-                const projCard = document.createElement('div');
-                projCard.className = "glass-card p-5 rounded-2xl flex flex-col justify-between space-y-3";
-                projCard.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <h4 class="font-bold text-sm text-white">${proj.title}</h4>
-                            <span class="text-slate-400 hover:text-purple-400 text-xs"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                        </div>
-                        <p class="text-xs text-slate-400 leading-relaxed">${proj.desc}</p>
-                    </div>
-                    <div class="flex flex-wrap gap-1.5 pt-2">
-                        ${proj.tags.map(t => `<span class="px-2 py-0.5 rounded-md bg-purple-950/60 border border-purple-800/40 text-[10px] text-purple-300">${t}</span>`).join('')}
-                    </div>
-                `;
-                projectsContainer.appendChild(projCard);
-            });
+        // 1. Light/Dark Theme Switcher
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                icon.className = "fa-solid fa-sun text-xs text-amber-500";
+                localStorage.setItem('theme_mode', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                icon.className = "fa-solid fa-moon text-xs text-slate-300";
+                localStorage.setItem('theme_mode', 'dark');
+            }
         }
 
-        // 4. Handle Avatar Upload (Instant Photo Change & Base64 Encode)
-        function handleAvatarUpload(event) {
+        // Restore saved theme mode & saved photo
+        (function initSavedData() {
+            const savedTheme = localStorage.getItem('theme_mode');
+            if (savedTheme === 'light') {
+                toggleTheme();
+            }
+            const savedPhoto = localStorage.getItem('ferry_profile_photo');
+            if (savedPhoto) {
+                document.getElementById('profile-avatar').src = savedPhoto;
+            }
+        })();
+
+        // 2. Photo Upload & Preview Handler (Saved to LocalStorage)
+        function uploadPhoto(event) {
             const file = event.target.files[0];
             if (file) {
                 if (file.size > 5 * 1024 * 1024) {
-                    showToast('Ukuran foto terlalu besar (maksimal 5MB)');
+                    showToast("Ukuran foto maksimal 5MB!");
                     return;
                 }
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const result = e.target.result;
-                    profileState.avatarUrl = result;
-                    document.getElementById('avatar-img').src = result;
-                    document.getElementById('edit-avatar-preview').src = result;
-                    document.getElementById('input-avatar-url').value = '';
-                    saveState();
-                    showToast('Foto profil berhasil diubah!');
+                    document.getElementById('profile-avatar').src = result;
+                    localStorage.setItem('ferry_profile_photo', result);
+                    showToast("Foto profil baru disimpan!");
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        // 5. Tab Navigation Handler
-        function switchTab(tabName) {
-            const tabs = ['links', 'about', 'projects'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-btn-${t}`);
-                const content = document.getElementById(`tab-content-${t}`);
-                if (t === tabName) {
-                    btn.className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-purple-600 text-white shadow-md";
-                    content.classList.remove('hidden');
+        // 3. Interactive Skill Category Filter
+        function filterSkills(category) {
+            const cards = document.querySelectorAll('.skill-card');
+            const btns = ['all', 'data', 'hr', 'finance'];
+
+            btns.forEach(b => {
+                const btn = document.getElementById(`btn-skill-${b}`);
+                if (b === category) {
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow-md transition";
                 } else {
-                    btn.className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
-                    content.classList.add('hidden');
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition";
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
                 }
             });
         }
 
-        // 6. Customization Modal Toggle & Live Population
-        function toggleEditPanel() {
-            const modal = document.getElementById('edit-modal');
-            const isOpening = modal.classList.contains('pointer-events-none');
+        // 4. BEP & HPP Calculator Logic
+        function calculateBEP() {
+            const cost = parseFloat(document.getElementById('calc-cost').value) || 0;
+            const units = parseFloat(document.getElementById('calc-units').value) || 1;
+            const price = parseFloat(document.getElementById('calc-price').value) || 0;
+
+            const hpp = cost / units;
+            const revenue = units * price;
+            const profit = revenue - cost;
+            const margin = revenue > 0 ? ((profit / revenue) * 100).toFixed(1) : 0;
+
+            document.getElementById('out-hpp').textContent = `Rp ${Math.round(hpp).toLocaleString('id-ID')}`;
+            document.getElementById('out-profit').textContent = `Rp ${Math.round(profit).toLocaleString('id-ID')}`;
             
-            if (isOpening) {
-                // Populate inputs with current state
-                document.getElementById('input-name').value = profileState.name;
-                document.getElementById('input-tagline').value = profileState.tagline;
-                document.getElementById('input-location').value = profileState.location;
-                document.getElementById('input-status').value = profileState.status;
-                document.getElementById('input-bio').value = profileState.bio;
-                document.getElementById('input-avatar-url').value = profileState.avatarUrl.startsWith('data:') ? '' : profileState.avatarUrl;
-                document.getElementById('edit-avatar-preview').src = profileState.avatarUrl;
-
-                renderModalLinksEditor();
-
-                modal.classList.remove('pointer-events-none', 'opacity-0');
+            const statusBadge = document.getElementById('out-status');
+            if (profit > 0) {
+                statusBadge.textContent = `UNTUNG (Margin ${margin}%)`;
+                statusBadge.className = "px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[11px]";
+            } else if (profit === 0) {
+                statusBadge.textContent = "IMPAS (BEP)";
+                statusBadge.className = "px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[11px]";
             } else {
-                modal.classList.add('pointer-events-none', 'opacity-0');
+                statusBadge.textContent = "RUGI";
+                statusBadge.className = "px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold text-[11px]";
             }
         }
 
-        // Render dynamic link inputs inside the modal
-        function renderModalLinksEditor() {
-            const container = document.getElementById('modal-links-editor');
-            container.innerHTML = '';
-            profileState.links.forEach((link, idx) => {
-                const item = document.createElement('div');
-                item.className = "p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 relative";
-                item.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-bold text-purple-400">Link #${idx + 1}</span>
-                        <button onclick="removeLink(${idx})" class="text-rose-400 hover:text-rose-300 text-xs p-1" title="Hapus Link">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <input type="text" value="${link.title}" onchange="updateLinkData(${idx}, 'title', this.value)" placeholder="Judul (ex: Instagram)" class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white">
-                        <input type="text" value="${link.subtitle}" onchange="updateLinkData(${idx}, 'subtitle', this.value)" placeholder="Keterangan Singkat" class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white">
-                    </div>
-                    <input type="text" value="${link.url}" onchange="updateLinkData(${idx}, 'url', this.value)" placeholder="URL Tujuan (https://...)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-purple-300">
-                `;
-                container.appendChild(item);
-            });
-        }
+        // Initialize calculator on page load
+        calculateBEP();
 
-        function updateLinkData(index, field, value) {
-            profileState.links[index][field] = value;
-        }
-
-        function addNewLink() {
-            profileState.links.push({
-                id: Date.now(),
-                title: "Tautan Baru",
-                subtitle: "Keterangan link baru kamu",
-                icon: "fa-solid fa-globe",
-                iconBg: "bg-purple-500/10 text-purple-400 border-purple-500/30",
-                url: "https://",
-                category: "Custom"
-            });
-            renderModalLinksEditor();
-        }
-
-        function removeLink(index) {
-            profileState.links.splice(index, 1);
-            renderModalLinksEditor();
-        }
-
-        // Save Profile Changes from Modal
-        function saveProfileChanges() {
-            const urlInput = document.getElementById('input-avatar-url').value.trim();
-            if (urlInput !== '') {
-                profileState.avatarUrl = urlInput;
-            }
-            profileState.name = document.getElementById('input-name').value;
-            profileState.tagline = document.getElementById('input-tagline').value;
-            profileState.location = document.getElementById('input-location').value;
-            profileState.status = document.getElementById('input-status').value;
-            profileState.bio = document.getElementById('input-bio').value;
-
-            saveState();
-            renderProfile();
-            toggleEditPanel();
-            showToast('Profil kamu berhasil diperbarui!');
-        }
-
-        // Theme Accent Switcher
-        function setThemeAccent(themeName) {
-            profileState.theme = themeName;
-            const root = document.documentElement;
-            
-            const themes = {
-                purple: { 50: '#f5f3ff', 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', glow: 'rgba(139, 92, 246, 0.35)' },
-                emerald: { 50: '#ecfdf5', 400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857', glow: 'rgba(16, 185, 129, 0.35)' },
-                cyan: { 50: '#ecfeff', 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', glow: 'rgba(6, 182, 212, 0.35)' },
-                rose: { 50: '#fff1f2', 400: '#fb7185', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c', glow: 'rgba(244, 63, 94, 0.35)' },
-                amber: { 50: '#fffbeb', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', glow: 'rgba(245, 158, 11, 0.35)' }
-            };
-
-            const t = themes[themeName] || themes.purple;
-            root.style.setProperty('--accent-50', t[50]);
-            root.style.setProperty('--accent-400', t[400]);
-            root.style.setProperty('--accent-500', t[500]);
-            root.style.setProperty('--accent-600', t[600]);
-            root.style.setProperty('--accent-700', t[700]);
-            root.style.setProperty('--accent-glow', t.glow);
-
-            saveState();
-        }
-
-        // Save State to Local Storage
-        function saveState() {
-            localStorage.setItem('alfari_profile_state', JSON.stringify(profileState));
-        }
-
-        // Reset Data to Default
-        function resetToDefaults() {
-            profileState = JSON.parse(JSON.stringify(DEFAULT_DATA));
-            saveState();
-            renderProfile();
-            setThemeAccent('purple');
-            toggleEditPanel();
-            showToast('Profil dikembalikan ke pengaturan awal!');
-        }
-
-        // 7. Share Modal Controls & Dynamic QR Generator
-        function openShareModal() {
-            const modal = document.getElementById('share-modal');
-            const currentUrl = window.location.href;
-            document.getElementById('share-url-input').value = currentUrl;
-            
-            // Generate clean QR code using api.qrserver.com
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}&color=0f172a`;
-            document.getElementById('qr-code-img').src = qrUrl;
-
+        // 5. Modal Controllers
+        function openModal(id) {
+            const modal = document.getElementById(id);
             modal.classList.remove('pointer-events-none', 'opacity-0');
         }
 
-        function closeShareModal() {
-            document.getElementById('share-modal').classList.add('pointer-events-none', 'opacity-0');
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('pointer-events-none', 'opacity-0');
         }
 
-        function copyProfileLink() {
-            const copyText = document.getElementById('share-url-input');
-            copyText.select();
-            document.execCommand('copy');
-            showToast('Link profil berhasil disalin!');
-            closeShareModal();
+        function sendSimulatedMessage(e) {
+            e.preventDefault();
+            const name = document.getElementById('msg-name').value;
+            const body = document.getElementById('msg-body').value;
+            const waUrl = `https://wa.me/6281234567890?text=Halo%20Ferry,%20saya%20${encodeURIComponent(name)}.%20${encodeURIComponent(body)}`;
+            window.open(waUrl, '_blank');
+            closeModal('contact-modal');
         }
 
-        // 8. Interactive Toast Notifications
-        function showToast(message) {
+        // 6. Toast Notification Helper
+        function showToast(msg) {
             const toast = document.getElementById('toast');
-            document.getElementById('toast-message').textContent = message;
+            document.getElementById('toast-text').textContent = msg;
             toast.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-10');
             setTimeout(() => {
                 toast.classList.add('pointer-events-none', 'opacity-0', 'translate-y-10');
             }, 3000);
-        }
-
-        // 9. Ambient Audio Synthesizer (Tone/Oscillator effect)
-        let audioCtx = null;
-        let isPlayingAudio = false;
-        let ambientOsc = null;
-
-        function toggleAudio() {
-            const soundIcon = document.getElementById('sound-icon');
-            if (!isPlayingAudio) {
-                try {
-                    const AudioContext = window.AudioContext || window.webkitAudioContext;
-                    audioCtx = new AudioContext();
-                    ambientOsc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-
-                    ambientOsc.type = 'sine';
-                    ambientOsc.frequency.setValueAtTime(220, audioCtx.currentTime); // Chill A3 note
-                    gain.gain.setValueAtTime(0.015, audioCtx.currentTime); // Soft volume
-
-                    ambientOsc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    ambientOsc.start();
-
-                    isPlayingAudio = true;
-                    soundIcon.className = "fa-solid fa-volume-high text-sm text-purple-400";
-                    showToast('Efek suara ambient aktif');
-                } catch (e) {
-                    showToast('Audio tidak didukung di peramban ini');
-                }
-            } else {
-                if (ambientOsc) ambientOsc.stop();
-                isPlayingAudio = false;
-                soundIcon.className = "fa-solid fa-volume-xmark text-sm";
-                showToast('Suara dinonaktifkan');
-            }
-        }
-
-        // 10. Interactive Canvas Particle System
-        function initBackgroundParticles() {
-            const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resize);
-            resize();
-
-            class Particle {
-                constructor() {
-                    this.reset();
-                }
-                reset() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 0.4;
-                    this.vy = (Math.random() - 0.5) * 0.4;
-                    this.radius = Math.random() * 1.8 + 0.6;
-                    this.alpha = Math.random() * 0.5 + 0.2;
-                }
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(167, 139, 250, ${this.alpha})`;
-                    ctx.fill();
-                }
-            }
-
-            for (let i = 0; i < 45; i++) {
-                particles.push(new Particle());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-
-                // Draw subtle connecting lines
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-
-                        if (dist < 110) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 * (1 - dist / 110)})`;
-                            ctx.lineWidth = 0.6;
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
-
-                requestAnimationFrame(animate);
-            }
-            animate();
         }
     </script>
 </body>
